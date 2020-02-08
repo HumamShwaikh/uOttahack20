@@ -87,10 +87,10 @@ for each in patient_list_1:
     steps = distance*(np.random.randint(1200,1800))
 
     #Data corresponding to time spent on activity
-    t_light = abs(np.random.normal(250, 200))
+    t_light = abs(np.random.normal(250, 100))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(1000, 900))
+    t_sed = abs(np.random.normal(1000, 300))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.75,1.25)))
 
     #Data corresponding to sleep
@@ -140,7 +140,7 @@ for each in patient_list_2:
     t_light = abs(np.random.normal(450, 200))
     t_med = (abs(np.random.uniform(0.2,0.6)))*t_light
     t_heavy = (abs(np.random.uniform(0.3,1.1)))*t_med
-    t_sed = abs(np.random.normal(2000, 1900))
+    t_sed = abs(np.random.normal(2000, 500))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.9,1.2)))
 
     #Data corresponding to sleep
@@ -192,7 +192,7 @@ for each in patient_list_3:
     t_light = abs(np.random.normal(150, 200))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(14000, 2000))
+    t_sed = abs(np.random.normal(14000, 6000))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
@@ -241,10 +241,10 @@ for each in patient_list_4:
     steps = distance*(np.random.randint(1300,1600))
 
     #Data corresponding to time spent on activity
-    t_light = abs(np.random.normal(150, 200))
+    t_light = abs(np.random.normal(150, 50))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(10000, 4400))
+    t_sed = abs(np.random.normal(10000, 2500))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
@@ -346,7 +346,7 @@ for each in patient_list_6:
     steps = distance*(np.random.randint(1300,1600))
 
     #Data corresponding to time spent on activity
-    t_light = abs(np.random.normal(150, 200))
+    t_light = abs(np.random.normal(150, 50))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
     t_sed = abs(np.random.normal(2000, 800))
