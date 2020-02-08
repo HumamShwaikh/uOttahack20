@@ -33,7 +33,7 @@ num_patients_2 = 100
 num_patients_3 = 50
 num_patients_4 = 130
 num_patients_5 = 90
-num_patients_6 = 60
+num_patients_6 = 600
 
 patient_list = []
 patient_list_1 = []
@@ -67,18 +67,8 @@ for o in range(0, num_patients_6):
     index_name_6 = base_name + str(11000) + str(num_patients_5) + str(o)
     patient_list_6.append(index_name_6)
 
-patient_list = patient_list_1 + patient_list_2 + patient_list_3
+patient_list = patient_list_1 #+ patient_list_2 + patient_list_3 + patient_list_4 + patient_list_5 + patient_list_6
 big_boy = pd.DataFrame(columns=col_list, index = patient_list)
-
-#Average calorie burn rates. Normal, and other distributions will be applied later
-r_light = 1.95
-r_med = 4.75
-r_heavy = 8.8
-r_sed = 0.03
-r_dist = 1.95
-
-#Averages
-walk_ave = 3.5
 
 for each in patient_list_1:
 
@@ -100,7 +90,7 @@ for each in patient_list_1:
     t_light = abs(np.random.normal(250, 200))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(1000, 200))
+    t_sed = abs(np.random.normal(1000, 900))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.75,1.25)))
 
     #Data corresponding to sleep
@@ -140,7 +130,7 @@ for each in patient_list_2:
     r_dist = 2.15
 
     #Averages
-    walk_ave = 7
+    walk_ave = 2
 
     #Data corresponding to steps and distance walked
     distance = abs(np.random.uniform(walk_ave,9))
@@ -150,7 +140,7 @@ for each in patient_list_2:
     t_light = abs(np.random.normal(450, 200))
     t_med = (abs(np.random.uniform(0.2,0.6)))*t_light
     t_heavy = (abs(np.random.uniform(0.3,1.1)))*t_med
-    t_sed = abs(np.random.normal(2000, 300))
+    t_sed = abs(np.random.normal(2000, 1900))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.9,1.2)))
 
     #Data corresponding to sleep
@@ -202,7 +192,7 @@ for each in patient_list_3:
     t_light = abs(np.random.normal(150, 200))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(10000, 200))
+    t_sed = abs(np.random.normal(14000, 2000))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
@@ -243,7 +233,7 @@ for each in patient_list_4:
     r_dist = 0.5
 
     #Averages
-    walk_ave = 6
+    walk_ave = 1
 
 
     #Data corresponding to steps and distance walked
@@ -254,7 +244,7 @@ for each in patient_list_4:
     t_light = abs(np.random.normal(150, 200))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(10000, 200))
+    t_sed = abs(np.random.normal(10000, 4400))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
@@ -295,18 +285,18 @@ for each in patient_list_5:
     r_dist = 0.5
 
     #Averages
-    walk_ave = 3
+    walk_ave = 4
 
 
     #Data corresponding to steps and distance walked
-    distance = abs(np.random.uniform(walk_ave,4))
+    distance = abs(np.random.uniform(walk_ave,6))
     steps = distance*(np.random.randint(800,1200))
 
     #Data corresponding to time spent on activity
     t_light = abs(np.random.normal(200, 100))
     t_med = (abs(np.random.uniform(0.05,0.3)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.7)))*t_med
-    t_sed = abs(np.random.normal(7000, 300))
+    t_sed = abs(np.random.normal(7000, 2400))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.3,1.0)))
 
     #Data corresponding to sleep
@@ -348,18 +338,18 @@ for each in patient_list_6:
     r_dist = 2
 
     #Averages
-    walk_ave = 5.5
+    walk_ave = 4
 
 
     #Data corresponding to steps and distance walked
-    distance = abs(np.random.uniform(walk_ave,4))
+    distance = abs(np.random.uniform(walk_ave,5.5))
     steps = distance*(np.random.randint(1300,1600))
 
     #Data corresponding to time spent on activity
     t_light = abs(np.random.normal(150, 200))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(10000, 200))
+    t_sed = abs(np.random.normal(2000, 800))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
@@ -376,18 +366,18 @@ for each in patient_list_6:
     Cals_BMR = (abs(np.random.uniform(0.5,0.85)))*(Cals_burned)
 
     big_boy.loc[each] = pd.Series({ 'Calories Burned':Cals_burned,
- 'Calories BMR':Cals_BMR,
- 'Steps':steps,
- 'Distance (Km)': distance,
- 'Resting Heart Rate':rhr,
- 'Minutes Sedentary':t_sed,
- 'Minutes Lightly Active':t_light,
- 'Minutes Fairly Active':t_med,
- 'Minutes Very Active':t_heavy,
- 'Activity Calories':Activity_cals,
- 'Fat Burn minutes':t_far_burn,
- 'Minutes Asleep':t_asleep,
- 'Minutes REM sleep':t_rem})
+'Calories BMR':Cals_BMR,
+'Steps':steps,
+'Distance (Km)': distance,
+'Resting Heart Rate':rhr,
+'Minutes Sedentary':t_sed,
+'Minutes Lightly Active':t_light,
+'Minutes Fairly Active':t_med,
+'Minutes Very Active':t_heavy,
+'Activity Calories':Activity_cals,
+'Fat Burn minutes':t_far_burn,
+'Minutes Asleep':t_asleep,
+'Minutes REM sleep':t_rem})
 
 big_boy.dropna(inplace=True)
 scaled_data = StandardScaler().fit_transform(big_boy.T)
