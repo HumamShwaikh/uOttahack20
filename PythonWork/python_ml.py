@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import math
 
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -435,22 +436,54 @@ print(df_m)
 fig = plt.figure()
 ax = fig.add_subplot(111,projection='3d')
 
-#  ax.scatter(result['PCA0'], result['PCA1'], result['PCA2'], cmap="Set2_r", color='Red')
+# ax.scatter(result['PCA0'], result['PCA1'], result['PCA2'], cmap="Set2_r", color='Red')
 
-colors = list(zip(*sorted(( 
-                    tuple(mcolors.rgb_to_hsv( 
-                          mcolors.to_rgba(color)[:3])), name) 
-                     for name, color in dict( 
-                            mcolors.BASE_COLORS, **mcolors.CSS4_COLORS 
-                                                      ).items())))[1]
-print(colors)
+arrayToPlot = []
+
+for i in range(result.__len__()):
+    arrayToPlot.append([0,0,0,0])
+    temp = 100000.0
+    for j in range(df_m.__len__()):
+        distance = np.abs(result['PCA0'][i]-df_m.iloc[j,0]) + np.abs(result['PCA1'][i]-df_m.iloc[j,1]) + np.abs(result['PCA2'][i]-df_m.iloc[j,2])
+        if (distance < temp):
+            arrayToPlot[i][0] = result['PCA0'][i]
+            arrayToPlot[i][1] = result['PCA1'][i]
+            arrayToPlot[i][2] = result['PCA2'][i]
+            arrayToPlot[i][3] = j
+            temp = distance
+
+greenPlot = []
+redPlot = []
+bluePlot = []
+yellowPlot = []
+pinkPlot = []
+
+for k in range(arrayToPlot.__len__()):
+    print(arrayToPlot[k][3])
+    if arrayToPlot[k][3] == 0:
+        greenPlot.append([arrayToPlot[k][0],arrayToPlot[k][1],arrayToPlot[k][2]])
+    elif arrayToPlot[k][3] == 1:
+        redPlot.append([arrayToPlot[k][0],arrayToPlot[k][1],arrayToPlot[k][2]])
+    elif arrayToPlot[k][3] == 2:
+        bluePlot.append([arrayToPlot[k][0],arrayToPlot[k][1],arrayToPlot[k][2]])
+    elif arrayToPlot[k][3] == 3:
+        yellowPlot.append([arrayToPlot[k][0],arrayToPlot[k][1],arrayToPlot[k][2]])
+    else:
+        pinkPlot.append([arrayToPlot[k][0],arrayToPlot[k][1],arrayToPlot[k][2]])
+
+
+for a in greenPlot:
+    ax.scatter(a[0],a[1],a[2], cmap="Set2_r", color='#06785e')
+for a in redPlot:
+    ax.scatter(a[0],a[1],a[2], cmap="Set2_r", color='#d31d0d')
+for a in bluePlot:
+    ax.scatter(a[0],a[1],a[2], cmap="Set2_r", color='#00487a')
+for a in yellowPlot:
+    ax.scatter(a[0],a[1],a[2], cmap="Set2_r", color='#f9aa00')
+for a in pinkPlot:
+    ax.scatter(a[0],a[1],a[2], cmap="Set2_r", color='#ff798a')
+
 ax.scatter(df_m.iloc[:,0], df_m.iloc[:,1], df_m.iloc[:,2], s=800, marker='+')
-ax.plot(df_m.iloc[:,0], df_m.iloc[:,1], df_m.iloc[:,2], color='r')
-
-# make simple, bare axis lines through space:
-# xAxisLine = ((min(result['PCA0']), max(result['PCA0'])), (0, 0), (0,0))
-# yAxisLine = ((0, 0), (min(result['PCA1']), max(result['PCA1'])), (0,0))
-# zAxisLine = ((0, 0), (0,0), (min(result['PCA2']), max(result['PCA2'])))
 
 # label the axes
 ax.set_xlabel("PC1")
