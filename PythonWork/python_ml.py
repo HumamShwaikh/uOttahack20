@@ -4,6 +4,8 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
 import matplotlib.pyplot as plt # default library for making plots
+from matplotlib import colors as mcolors 
+
 import seaborn as sns ; sns.set()# for making prettier plots!
 
 from sklearn.decomposition import PCA
@@ -30,10 +32,10 @@ col_list = [
 
 base_name = 'patient'
 
-num_patients_1 = 100
-num_patients_2 = 100
-num_patients_3 = 100
-num_patients_4 = 100
+num_patients_1 = 40
+num_patients_2 = 60
+num_patients_3 = 10
+num_patients_4 = 130
 num_patients_5 = 100
 num_patients_6 = 100
 
@@ -166,22 +168,19 @@ for each in patient_list_2:
     Cals_burned = Activity_cals + distance*(r_dist) + np.random.randint(100,200)
     Cals_BMR = (abs(np.random.uniform(0.6,0.9)))*(Cals_burned)
 
-    big_boy.loc[each] = pd.Series({ 
-        'Calories Burned':Cals_burned,
-        'Calories BMR':Cals_BMR,
-        'Steps':steps,
-        'Distance (Km)': distance,
-        'Resting Heart Rate':rhr,
-        'Minutes Sedentary':t_sed,
-        'Minutes Lightly Active':t_light,
-        'Minutes Fairly Active':t_med,
-        'Minutes Very Active':t_heavy,
-        'Activity Calories':Activity_cals,
-        'Fat Burn minutes':t_far_burn,
-        'Minutes Asleep':t_asleep,
-        'Minutes REM sleep':t_rem})
-
-
+    big_boy.loc[each] = pd.Series({ 'Calories Burned':Cals_burned,
+'Calories BMR':Cals_BMR,
+'Steps':steps,
+'Distance (Km)': distance,
+'Resting Heart Rate':rhr,
+'Minutes Sedentary':t_sed,
+'Minutes Lightly Active':t_light,
+'Minutes Fairly Active':t_med,
+'Minutes Very Active':t_heavy,
+'Activity Calories':Activity_cals,
+'Fat Burn minutes':t_far_burn,
+'Minutes Asleep':t_asleep,
+'Minutes REM sleep':t_rem})
 
 
 for each in patient_list_3:
@@ -195,7 +194,6 @@ for each in patient_list_3:
 
     #Averages
     walk_ave = 2
-
 
     #Data corresponding to steps and distance walked
     distance = abs(np.random.uniform(walk_ave,4))
@@ -425,20 +423,29 @@ models = [GaussianMixture(n, covariance_type='full', random_state=0).fit(result.
 plt.plot(n_components, [m.bic(result.values) for m in models], color='red', marker = 'x',markersize=10, linewidth=2, alpha = 0.9)
 plt.legend(loc='best')
 plt.xlabel('Number of Clusters')
-plt.ylabel('BIC Evaluation');
+plt.ylabel('BIC Evaluation')
 
 gmm = GaussianMixture(n_components=5).fit(result.values)
 labels = gmm.predict(result.values)
 
 df_m = pd.DataFrame(gmm.means_)
-df_m
+print(df_m)
 
 # Plot initialisation
 fig = plt.figure()
 ax = fig.add_subplot(111,projection='3d')
-ax.scatter(result['PCA0'], result['PCA1'], result['PCA2'], cmap="Set2_r")
+
+#  ax.scatter(result['PCA0'], result['PCA1'], result['PCA2'], cmap="Set2_r", color='Red')
+
+colors = list(zip(*sorted(( 
+                    tuple(mcolors.rgb_to_hsv( 
+                          mcolors.to_rgba(color)[:3])), name) 
+                     for name, color in dict( 
+                            mcolors.BASE_COLORS, **mcolors.CSS4_COLORS 
+                                                      ).items())))[1]
+print(colors)
 ax.scatter(df_m.iloc[:,0], df_m.iloc[:,1], df_m.iloc[:,2], s=800, marker='+')
-#ax.plot(df_m.iloc[:,0], df_m.iloc[:,1], df_m.iloc[:,2], color='r')
+ax.plot(df_m.iloc[:,0], df_m.iloc[:,1], df_m.iloc[:,2], color='r')
 
 # make simple, bare axis lines through space:
 # xAxisLine = ((min(result['PCA0']), max(result['PCA0'])), (0, 0), (0,0))
