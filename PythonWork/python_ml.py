@@ -99,10 +99,10 @@ for each in patient_list_1:
     steps = distance*(np.random.randint(1200,1800))
 
     #Data corresponding to time spent on activity
-    t_light = abs(np.random.normal(250, 200))
+    t_light = abs(np.random.normal(250, 100))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(1000, 200))
+    t_sed = abs(np.random.normal(1000, 300))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.75,1.25)))
 
     #Data corresponding to sleep
@@ -205,7 +205,7 @@ for each in patient_list_3:
     t_light = abs(np.random.normal(150, 200))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(10000, 200))
+    t_sed = abs(np.random.normal(14000, 6000))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
@@ -246,7 +246,7 @@ for each in patient_list_4:
     r_dist = 0.5
 
     #Averages
-    walk_ave = 6
+    walk_ave = 1
 
 
     #Data corresponding to steps and distance walked
@@ -254,10 +254,10 @@ for each in patient_list_4:
     steps = distance*(np.random.randint(1300,1600))
 
     #Data corresponding to time spent on activity
-    t_light = abs(np.random.normal(150, 200))
+    t_light = abs(np.random.normal(150, 50))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(10000, 200))
+    t_sed = abs(np.random.normal(10000, 2500))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
@@ -298,18 +298,18 @@ for each in patient_list_5:
     r_dist = 0.5
 
     #Averages
-    walk_ave = 3
+    walk_ave = 4
 
 
     #Data corresponding to steps and distance walked
-    distance = abs(np.random.uniform(walk_ave,4))
+    distance = abs(np.random.uniform(walk_ave,6))
     steps = distance*(np.random.randint(800,1200))
 
     #Data corresponding to time spent on activity
     t_light = abs(np.random.normal(200, 100))
     t_med = (abs(np.random.uniform(0.05,0.3)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.7)))*t_med
-    t_sed = abs(np.random.normal(7000, 300))
+    t_sed = abs(np.random.normal(7000, 2400))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.3,1.0)))
 
     #Data corresponding to sleep
@@ -355,14 +355,14 @@ for each in patient_list_6:
 
 
     #Data corresponding to steps and distance walked
-    distance = abs(np.random.uniform(walk_ave,4))
+    distance = abs(np.random.uniform(walk_ave,5.5))
     steps = distance*(np.random.randint(1300,1600))
 
     #Data corresponding to time spent on activity
-    t_light = abs(np.random.normal(150, 200))
+    t_light = abs(np.random.normal(150, 100))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(10000, 200))
+    t_sed = abs(np.random.normal(2300, 1000))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
