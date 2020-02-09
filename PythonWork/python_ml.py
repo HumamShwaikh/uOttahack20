@@ -9,6 +9,9 @@ import seaborn as sns ; sns.set()# for making prettier plots!
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
+from sklearn.mixture import GaussianMixture
+
+
 plt.rcParams['figure.figsize'] = [24, 12]
 
 col_list = [
@@ -400,9 +403,42 @@ pca.fit(big_boy)
 result=pd.DataFrame(pca.transform(big_boy), columns=['PCA%i' % i for i in range(3)])
 
 # Plot initialisation
+# fig = plt.figure()
+# ax = fig.add_subplot(111,projection='3d')
+# ax.scatter(result['PCA0'], result['PCA1'], result['PCA2'], cmap="Set2_r")
+
+# make simple, bare axis lines through space:
+# xAxisLine = ((min(result['PCA0']), max(result['PCA0'])), (0, 0), (0,0))
+# yAxisLine = ((0, 0), (min(result['PCA1']), max(result['PCA1'])), (0,0))
+# zAxisLine = ((0, 0), (0,0), (min(result['PCA2']), max(result['PCA2'])))
+
+# label the axes
+# ax.set_xlabel("PC1")
+# ax.set_ylabel("PC2")
+# ax.set_zlabel("PC3")
+#plt.show()
+
+n_components = np.arange(1, 10)
+models = [GaussianMixture(n, covariance_type='full', random_state=0).fit(result.values)
+          for n in n_components]
+
+plt.plot(n_components, [m.bic(result.values) for m in models], color='red', marker = 'x',markersize=10, linewidth=2, alpha = 0.9)
+plt.legend(loc='best')
+plt.xlabel('Number of Clusters')
+plt.ylabel('BIC Evaluation');
+
+gmm = GaussianMixture(n_components=5).fit(result.values)
+labels = gmm.predict(result.values)
+
+df_m = pd.DataFrame(gmm.means_)
+df_m
+
+# Plot initialisation
 fig = plt.figure()
 ax = fig.add_subplot(111,projection='3d')
 ax.scatter(result['PCA0'], result['PCA1'], result['PCA2'], cmap="Set2_r")
+ax.scatter(df_m.iloc[:,0], df_m.iloc[:,1], df_m.iloc[:,2], s=800, marker='+')
+#ax.plot(df_m.iloc[:,0], df_m.iloc[:,1], df_m.iloc[:,2], color='r')
 
 # make simple, bare axis lines through space:
 # xAxisLine = ((min(result['PCA0']), max(result['PCA0'])), (0, 0), (0,0))
