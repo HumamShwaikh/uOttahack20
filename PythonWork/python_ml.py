@@ -30,7 +30,7 @@ base_name = 'patient'
 
 num_patients_1 = 100
 num_patients_2 = 100
-num_patients_3 = 2s00
+num_patients_3 = 200
 num_patients_4 = 200
 num_patients_5 = 300
 num_patients_6 = 300
