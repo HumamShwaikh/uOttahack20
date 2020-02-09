@@ -28,12 +28,12 @@ col_list = [
 
 base_name = 'patient'
 
-num_patients_1 = 80
+num_patients_1 = 100
 num_patients_2 = 100
-num_patients_3 = 50
-num_patients_4 = 130
-num_patients_5 = 90
-num_patients_6 = 600
+num_patients_3 = 2s00
+num_patients_4 = 200
+num_patients_5 = 300
+num_patients_6 = 300
 
 patient_list = []
 patient_list_1 = []
@@ -346,10 +346,10 @@ for each in patient_list_6:
     steps = distance*(np.random.randint(1300,1600))
 
     #Data corresponding to time spent on activity
-    t_light = abs(np.random.normal(150, 50))
+    t_light = abs(np.random.normal(150, 100))
     t_med = (abs(np.random.uniform(0.1,0.5)))*t_light
     t_heavy = (abs(np.random.uniform(0,0.9)))*t_med
-    t_sed = abs(np.random.normal(2000, 800))
+    t_sed = abs(np.random.normal(2300, 1000))
     t_far_burn = t_heavy*(abs(np.random.uniform(0.5,1.0)))
 
     #Data corresponding to sleep
